@@ -3,6 +3,7 @@ package com.yann.advance.log;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 
 import com.orhanobut.logger.Logger;
@@ -56,6 +57,17 @@ public class LogTestActivity extends BaseActivity {
         Logger.e(userName);
         Logger.d("hellword");
         Logger.i(TAG);
+    }
+
+    /**
+     * 初始化toolbar
+     *
+     * @param toolbar
+     */
+    @Override
+    protected void exInitToolbar(Toolbar toolbar) {
+        super.exInitToolbar(toolbar);
+        toolbar.setTitle("Log测试");
     }
 
     // 创建json数据

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -31,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected View contentView;
     protected ProgressBar progressBar;
+    protected Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rootViewFrame = layoutInflater.inflate(R.layout.base_container, null);
         progressBar = rootViewFrame.findViewById(R.id.progressbar);
+        toolbar = rootViewFrame.findViewById(R.id.titleBar);
         FrameLayout rootView = rootViewFrame.findViewById(R.id.rootView);
 
         int layoutId = exInitLayout();
@@ -61,6 +64,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         exInitBundle(savedInstanceState, getIntent());
 
         exInitView();
+
+        exInitToolbar(toolbar);
 
         if(!exInterceptInit()) {
             exInitData();
@@ -120,7 +125,26 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Method_初始化数据： 在基础数据初始化完成之后可以使用该方法
      */
     protected void exInitData() {
+    }
 
+    /**
+     * 初始化toolbar
+     *
+     * @param toolbar
+     */
+    protected void exInitToolbar(Toolbar toolbar) {
+        if(toolbar !=null){
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    back();
+                }
+            });
+        }
+    }
+
+    protected void back(){
+        finish();
     }
 
     protected void showToast(final String msg) {
