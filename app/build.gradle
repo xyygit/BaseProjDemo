@@ -30,6 +30,9 @@ dependencies {
 
     implementation 'com.alibaba:fastjson:1.1.67.android'
 
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
