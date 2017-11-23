@@ -6,15 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 import com.yann.advance.R;
+import com.yann.advance.view.BaseToolBar;
+import com.yann.advance.view.StatusBarCompat;
 
 import butterknife.ButterKnife;
 
@@ -32,108 +34,71 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected View contentView;
     protected ProgressBar progressBar;
-    protected Toolbar toolbar;
+    protected BaseToolBar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
-        exProcessOnCreateBefore(savedInstanceState);
-
         super.onCreate(savedInstanceState);
-
-        if (exInterceptOnCreate(savedInstanceState)) {
-            return;
-        }
 
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rootViewFrame = layoutInflater.inflate(R.layout.base_container, null);
         progressBar = rootViewFrame.findViewById(R.id.progressbar);
         toolbar = rootViewFrame.findViewById(R.id.titleBar);
+        toolbar.setToolbarTitle((TextView) rootViewFrame.findViewById(R.id.toolbar_title));
+        toolbar.setExtendFrame((FrameLayout)rootViewFrame.findViewById(R.id.extendFrame));
         FrameLayout rootView = rootViewFrame.findViewById(R.id.rootView);
 
-        int layoutId = exInitLayout();
-        if (layoutId == 0) {
-            contentView = exInitLayoutView();
-        } else {
-            contentView = layoutInflater.inflate(layoutId, null);
-        }
+        contentView = layoutInflater.inflate(getLayoutId(), null);
         if (contentView != null) rootView.addView(contentView);
 
         setContentView(rootViewFrame);
 
-        exInitBundle(savedInstanceState, getIntent());
-
-        exInitView();
-
-        exInitToolbar(toolbar);
-
-        if(!exInterceptInit()) {
-            exInitData();
-        }
+        initToolbar(toolbar);
 
         mContext = this;
 
         ButterKnife.bind(this);
         Logger.t(TAG);
+
+        initBundle(savedInstanceState, getIntent());
+
+        initView();
+
+        initData();
+
+        StatusBarCompat.compat(this,getStatusColor());
     }
 
     /**
-     * Method ：在 OnCreate 前执行
-     */
-    protected abstract void exProcessOnCreateBefore(Bundle savedInstanceState);
-
-
-    /**
-     * Method_拦截 ：对 OnCreate 拦截处理
+     * 获取当前界面的布局ID
      *
-     * @return 是否拦截 OnCreate
+     * @return 当前界面的布局ID
      */
-    protected abstract boolean exInterceptOnCreate(Bundle savedInstanceState);
+    protected abstract int getLayoutId();
 
+    protected abstract void initBundle(Bundle savedInstanceState, Intent intent);
 
     /**
-     * Method_初始化传入参数 ：处理进入之前传入的数据
+     * 初始化布局内的控件
      */
-    protected void exInitBundle(Bundle savedInstanceState, Intent intent) {
-
-    }
+    protected abstract void initView();
 
     /**
-     * Method_初始化布局 ：对展示布局进行设置
-     *
-     * @return 布局资源 ID
+     * 初始化相关数据
      */
-    protected abstract int exInitLayout();
+    protected abstract void initData();
 
-    /**
-     * Method_初始化布局 ：对展示布局进行设置
-     *
-     * @return 布局资源 View
-     */
-    protected View exInitLayoutView() {
-        return null;
-    }
-
-    protected abstract boolean exInterceptInit();
-
-    /**
-     * Method_初始化控件参数： 在该方法中，可以对已绑定的控件数据初始化
-     */
-    protected abstract void exInitView();
-
-    /**
-     * Method_初始化数据： 在基础数据初始化完成之后可以使用该方法
-     */
-    protected void exInitData() {
-    }
+    protected abstract int getStatusColor();
 
     /**
      * 初始化toolbar
      *
      * @param toolbar
      */
-    protected void exInitToolbar(Toolbar toolbar) {
+    protected void initToolbar(BaseToolBar toolbar) {
         if(toolbar !=null){
+            toolbar.setNavigationIcon(R.drawable.actionbar_back);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

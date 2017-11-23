@@ -3,12 +3,13 @@ package com.yann.advance.log;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 
 import com.orhanobut.logger.Logger;
 import com.yann.advance.R;
 import com.yann.advance.base.BaseActivity;
+import com.yann.advance.view.BaseToolBar;
+import com.yann.advance.view.StatusBarCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,45 +30,34 @@ public class LogTestActivity extends BaseActivity {
     }
 
     @Override
-    protected void exProcessOnCreateBefore(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected boolean exInterceptOnCreate(Bundle savedInstanceState) {
-        return false;
-    }
-
-    @Override
-    protected int exInitLayout() {
+    protected int getLayoutId() {
         return R.layout.activity_log_test;
     }
 
     @Override
-    protected boolean exInterceptInit() {
-        return false;
+    protected void initBundle(Bundle savedInstanceState, Intent intent) {
+
     }
 
     @Override
-    protected void exInitView() {
-        String userName = "Jerry";
-        Logger.i(userName);
-        // 给当前打印的换一个单独的tag名
-        Logger.t("App").i(userName);
-        Logger.e(userName);
-        Logger.d("hellword");
-        Logger.i(TAG);
+    protected void initView() {
+        StatusBarCompat.compat(LogTestActivity.this,getResources().getColor(R.color.colorPrimaryDark));
     }
 
-    /**
-     * 初始化toolbar
-     *
-     * @param toolbar
-     */
     @Override
-    protected void exInitToolbar(Toolbar toolbar) {
-        super.exInitToolbar(toolbar);
-        toolbar.setTitle("Log测试");
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initToolbar(BaseToolBar toolbar) {
+        super.initToolbar(toolbar);
+        toolbar.setTitle("Log测试页面");
+    }
+
+    @Override
+    protected int getStatusColor() {
+        return getResources().getColor(R.color.colorPrimaryDark);
     }
 
     // 创建json数据

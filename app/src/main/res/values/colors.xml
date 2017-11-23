@@ -6,6 +6,6 @@
     <color name="color_white">#FFFFFe</color>
     <color name="color_black">#000000</color>
     <color name="color_background">@color/color_white</color>
-
+    <color name="status_bar_color">#334081</color>
 
 </resources>
