@@ -49,7 +49,7 @@ public class LoggerUtils {
                 .tag("logger")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
 
-        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+        Logger.addLogAdapter(new AndroidLogAdapter());
 
         //TODO: Save logs to the file
         FormatStrategy formatStrategy1 = CsvFormatStrategy.newBuilder()

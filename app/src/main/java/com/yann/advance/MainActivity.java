@@ -92,8 +92,9 @@ public class MainActivity extends BaseActivity {
         homeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(MainActivity.this, ACTIVITY[position]);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, ACTIVITY[position]);
+//                startActivity(intent);
+                launcher(ACTIVITY[position]);
             }
         });
 

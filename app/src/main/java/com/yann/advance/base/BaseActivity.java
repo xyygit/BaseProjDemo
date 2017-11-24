@@ -121,4 +121,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mToast.show();
     }
+
+    protected void launcher(Class cls) {
+        mContext.startActivity(new Intent(mContext, cls));
+    }
 }

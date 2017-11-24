@@ -7,5 +7,6 @@
     <color name="color_black">#000000</color>
     <color name="color_background">@color/color_white</color>
     <color name="status_bar_color">#334081</color>
+    <color name="color_bg">#8fc1f4</color>
 
 </resources>
