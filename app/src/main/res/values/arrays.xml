@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--首页列表item信息 -->
+    <array name="activty_home">
+        <item>LogTestActivity.class</item>
+        <item>DataActivity.class</item>
+    </array>
+    <string-array name="title_home">
+        <item>日志打印测试"</item>
+        <item>数据库测试</item>
+    </string-array>
+
+</resources>

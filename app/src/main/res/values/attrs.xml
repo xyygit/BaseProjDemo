@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--简单粒子动画-->
+    <declare-styleable name="ParticleView">
+        <!--设置左边主文案-->
+        <attr name="pv_host_text" format="string"></attr>
+        <!--设置主文案的大小-->
+        <attr name="pv_host_text_size" format="dimension"></attr>
+        <!--设置右边粒子上的文案-->
+        <attr name="pv_particle_text" format="string"></attr>
+        <!--设置粒子上文案的大小-->
+        <attr name="pv_particle_text_size" format="dimension"></attr>
+        <!--设置左边主文案颜色-->
+        <attr name="pv_text_color" format="color"></attr>
+        <!--设置背景颜色-->
+        <attr name="pv_background_color" format="color"></attr>
+        <!--设置粒子上文案的运动时间-->
+        <attr name="pv_text_anim_time" format="integer"></attr>
+        <!--设置粒子上文案的伸展时间-->
+        <attr name="pv_spread_anim_time" format="integer"></attr>
+        <!--设置左边主文案的位移时间-->
+        <attr name="pv_host_text_anim_time" format="integer"></attr>
+    </declare-styleable>
+</resources>
